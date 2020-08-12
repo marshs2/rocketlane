@@ -1,0 +1,53 @@
+.main {
+    padding: 64px 4px 4px 64px;
+}
+
+.heading {
+    text-align: left;
+    margin: 0 4px 0 4px ;
+    display: flex;
+    align-items: center;
+}
+
+.heading .text {
+    flex: 60%;
+}
+
+.heading .filter {
+    height: 30px;
+}
+
+.heading .filter .filter-button {
+    background: #2764f5;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+}
+
+article {
+    margin: 4px;
+}
+
+article.grid {
+    flex: 70% 1;
+    height: 83vh;
+}
+
+article.filter {
+    flex: 30%;
+    /*display: none;*/
+}
+
+article.filter.show {
+    display: block;
+}
+
+article.filter.hide {
+    display: none;
+}
+
+
+section {
+    display: flex;
+}

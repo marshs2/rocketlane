@@ -1,0 +1,23 @@
+/*.odd-row {
+    background: white;
+}
+
+.odd-row:hover {
+    background: white;
+}
+
+.even-row {
+    background: white;
+}
+
+.even-row:hover {
+    background: #ebf3f5;
+}*/
+
+.rocket-row {
+    background: white;
+}
+
+.rocket-row:hover {
+    background: #ebf3f5;
+}
