@@ -2,7 +2,59 @@
     overflow: auto;
 }
 
-table {
-    width: 100%;
+article {
+    margin: 4px;
+    border: 1px solid #cacaca;
+}
+
+article.grid {
+    flex: 70% 1;
+    height: 83vh;
+}
+
+article.filter {
+    flex: 30%;
+    text-align: left;
+    padding-left: 5px;
+}
+
+article.filter label {
     font-size: 12px;
+}
+
+article.filter.show {
+    display: block;
+}
+
+article.filter.hide {
+    display: none;
+}
+
+
+section {
+    display: flex;
+}
+
+/*Filter*/
+.filter-btn-container {
+    position: relative;
+    /* left: 92%; */
+    /* top: -20px; */
+    /* margin: -1px; */
+    display: block;
+    float: right;
+    /* margin: 20px; */
+    left: -81px;
+    top: -21px;
+}
+
+.filter-btn-container .filter-button {
+    background: #2764f5;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+    width: 70px;
+    display: block;
+    position: absolute;
 }

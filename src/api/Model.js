@@ -24,9 +24,9 @@ export default function Model() {
             },
             {
                 "id": 4,
-                "name": "item",
+                "name": "items",
                 "sortable": true,
-                "displayName": "Item",
+                "displayName": "Items",
                 "type": "string"
             },
             {
@@ -56,7 +56,7 @@ export default function Model() {
                 "date": "1/6/2019",
                 "region": "East",
                 "rep": "Jones",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -66,7 +66,7 @@ export default function Model() {
                 "date": "1/23/2019",
                 "region": "Central",
                 "rep": "Kivell",
-                "item": "Binder",
+                "items": "Binder",
                 "units": 95,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -76,7 +76,7 @@ export default function Model() {
                 "date": "2/9/2019",
                 "region": "Central",
                 "rep": "Jardine",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 1,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -86,7 +86,7 @@ export default function Model() {
                 "date": "2/26/2019",
                 "region": "Central",
                 "rep": "Gill",
-                "item": "Pen",
+                "items": "Pen",
                 "units": 95,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -96,7 +96,7 @@ export default function Model() {
                 "date": "3/15/2019",
                 "region": "West",
                 "rep": "Sorvino",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -106,7 +106,7 @@ export default function Model() {
                 "date": "4/1/2019",
                 "region": "East",
                 "rep": "Jones",
-                "item": "Binder",
+                "items": "Binder",
                 "units": 100,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -116,7 +116,7 @@ export default function Model() {
                 "date": "4/18/2019",
                 "region": "Central",
                 "rep": "Andrews",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 1.99,
                 "total": 183.05
@@ -126,7 +126,7 @@ export default function Model() {
                 "date": "5/5/2019",
                 "region": "Central",
                 "rep": "Jardine",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 3.99,
                 "total": 189.05
@@ -136,7 +136,7 @@ export default function Model() {
                 "date": "5/22/2019",
                 "region": "West",
                 "rep": "Thompson",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 1.59,
                 "total": 189.05
@@ -146,7 +146,7 @@ export default function Model() {
                 "date": "6/8/2019",
                 "region": "East",
                 "rep": "Jones",
-                "item": "Binder",
+                "items": "Binder",
                 "units": 95,
                 "unitcost": 1.92,
                 "total": 189.05
@@ -156,7 +156,7 @@ export default function Model() {
                 "date": "6/25/2019",
                 "region": "Central",
                 "rep": "Morgan",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 1.69,
                 "total": 189.05
@@ -166,7 +166,7 @@ export default function Model() {
                 "date": "1/6/2019",
                 "region": "East",
                 "rep": "Jones",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 1.96,
                 "total": 189.05
@@ -176,7 +176,7 @@ export default function Model() {
                 "date": "1/6/2019",
                 "region": "East",
                 "rep": "Jones",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 8.99,
                 "total": 189.05
@@ -186,7 +186,7 @@ export default function Model() {
                 "date": "1/6/2019",
                 "region": "East",
                 "rep": "Jones",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 4.99,
                 "total": 189.05
@@ -196,7 +196,7 @@ export default function Model() {
                 "date": "1/23/2019",
                 "region": "Central",
                 "rep": "Kivell",
-                "item": "Binder",
+                "items": "Binder",
                 "units": 954,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -206,7 +206,7 @@ export default function Model() {
                 "date": "2/9/2019",
                 "region": "Central",
                 "rep": "Jardine",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 3915,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -216,7 +216,7 @@ export default function Model() {
                 "date": "2/26/2019",
                 "region": "Central",
                 "rep": "Gill",
-                "item": "Pen",
+                "items": "Pen",
                 "units": 395,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -226,7 +226,7 @@ export default function Model() {
                 "date": "3/15/2019",
                 "region": "West",
                 "rep": "Sorvino",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 895,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -236,7 +236,7 @@ export default function Model() {
                 "date": "4/1/2019",
                 "region": "East",
                 "rep": "Jones",
-                "item": "Binder",
+                "items": "Binder",
                 "units": 195,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -246,7 +246,7 @@ export default function Model() {
                 "date": "4/18/2019",
                 "region": "Central",
                 "rep": "Andrews",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 195,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -256,7 +256,7 @@ export default function Model() {
                 "date": "5/5/2019",
                 "region": "Central",
                 "rep": "Jardine",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -266,7 +266,7 @@ export default function Model() {
                 "date": "5/22/2019",
                 "region": "West",
                 "rep": "Thompson",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 895,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -276,7 +276,7 @@ export default function Model() {
                 "date": "6/8/2019",
                 "region": "East",
                 "rep": "Jones",
-                "item": "Binder",
+                "items": "Binder",
                 "units": 595,
                 "unitcost": 1.99,
                 "total": 189.05
@@ -286,7 +286,7 @@ export default function Model() {
                 "date": "6/25/2019",
                 "region": "Central",
                 "rep": "Morgan",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 1.99,
                 "total": 189.55
@@ -296,7 +296,7 @@ export default function Model() {
                 "date": "1/6/2019",
                 "region": "East",
                 "rep": "Jones",
-                "item": "Pencil",
+                "items": "Pencil",
                 "units": 95,
                 "unitcost": 1.99,
                 "total": 589.05

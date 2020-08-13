@@ -1,22 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import './RocketGrid.css';
 
-import HeaderCell from './HeaderCell';
+import Grid from './Grid';
+import Filter from './Filter';
 import BodyCell from './BodyCell';
 
 export default function RocketGrid (props) {
-
-    const [columns, setColumns] = useState(props.columns);
-    const [sortMeta, setSortMeta] = useState(JSON.parse(localStorage.getItem('sort-meta')));
-    const [typeMeta, setTypeMeta] = useState({});
-    const [sortable, setSortable] = useState({});
+    const [isFilterOpen, setToggleFilter] = useState(false);
+    // const [columns] = useState(props.columns);
+    // const [sortMeta, setSortMeta] = useState(JSON.parse(localStorage.getItem('sort-meta')));
+    const [sortMeta, setSortMeta] = useState({});
+    const [typeMeta] = useState({});
+    const [sortable] = useState({});
+    const [filterMeta, setFilterMeta] = useState({
+        "items": {
+            "Binder": true,
+            "Pencil": false,
+            "Pen": false
+        }, 
+        "region": {
+            "East": true,
+            "Central": false,
+            "West": false
+        } 
+    });
+    const [filterCount, setFilterCount] = useState(0);
+    const [totalFilterCount, setTotalFilterCount] = useState(0);
 
      useEffect(() => {
-        if (!sortMeta) {
-            setSortMeta(() => {
-                localStorage.setItem('sort-meta', JSON.stringify({}));
-            });
-        }
+        // if (!sortMeta) {
+        //     setSortMeta(() => {
+        //         localStorage.setItem('sort-meta', JSON.stringify({}));
+        //     });
+        // }
+
+        // if (!filterMeta) {
+        //     setFilterMeta(() => {
+        //         localStorage.setItem('filter-meta', JSON.stringify({
+        //             "items": {
+        //                 "Binder": true,
+        //                 "Pencil": false,
+        //                 "Pen": false
+        //             }, 
+        //             "region": {
+        //                 "East": true,
+        //                 "Central": false,
+        //                 "West": false
+        //             }
+        //         }))
+        //     })
+        // }
 
         if (props.columns.length) {
             props.columns.forEach((column) => {
@@ -24,7 +57,24 @@ export default function RocketGrid (props) {
                 sortable[column['name']] = column['sortable'];
             })
         }
+
     }, [props.columns, sortMeta, typeMeta, sortable]);
+
+    useEffect(() => {
+        if (filterMeta) {
+            let filterCount = 0, totalFilterCount = 0;
+            Object.keys(filterMeta).forEach(group => {
+                Object.keys(filterMeta[group]).forEach((list) => {
+                    totalFilterCount++;
+                    if (filterMeta[group][list]) {
+                        filterCount++;
+                    }
+                })
+            });
+            setFilterCount(() => filterCount);
+            setTotalFilterCount(() => totalFilterCount);
+        }   
+    }, [filterMeta]);
 
     const onSort = (event) => {
         const { attributes: { "data-column-name": {nodeValue} } } = event.target;
@@ -63,11 +113,12 @@ export default function RocketGrid (props) {
     const onRowRefresh = () => {
         let rows = [...props.rows];
 
-        let metaKeys = sortMeta ? Object.keys(sortMeta): {};
+        let sortMetaKeys = sortMeta ? Object.keys(sortMeta): {};
+        let filterMetaKeys = filterMeta ? Object.keys(filterMeta): {};
 
-        if (rows.length && metaKeys.length) {
+        if (rows.length && sortMetaKeys.length) {
             // Current Sort Column is determined by this
-            let key = metaKeys[0];
+            let key = sortMetaKeys[0];
 
             if (sortMeta[key]) {
                 if (typeMeta[key] === "string") {
@@ -86,21 +137,65 @@ export default function RocketGrid (props) {
             }
         }
 
-        return rows.map((row, i) => 
-            <BodyCell key={i} row={row} columns={props.columns} sortMeta={sortMeta}/> )
-        
+        return rows
+            .filter(row => {
+                if (filterMetaKeys.length) {
+                    for (let i = 0; i < filterMetaKeys.length; i++) {
+                        if (filterMeta[filterMetaKeys[i]][row[filterMetaKeys[i]]]) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+    
+                return true;
+            })
+            .map((row, i) => 
+                <BodyCell key={i} row={row} columns={props.columns} sortMeta={sortMeta}/> )
+    }
+
+    const onFilter = () => {
+        setToggleFilter(!isFilterOpen);
+    }
+
+    const filterChange = (event) => {
+        const {checked, value, attributes: { "data-group": {nodeValue: group} }} = event.target;
+        setFilterCount(checked? filterCount + 1: filterCount - 1);
+        setFilterMeta({...filterMeta, [group]: { ...filterMeta[group], [value]: checked }});
+    }
+
+    const displayFilterCount = () => {
+        if (filterCount < totalFilterCount) {
+            return `(${filterCount})`;
+        }
+
+        return '';
     }
 
     return (
-        <div className="grid">
-            <table className="grid-table">
-                <tr>
-                    {props.columns.map((column, i) => 
-                        <HeaderCell key={i} column={column} onSort={onSort} sortMeta={sortMeta}/>)}
-                </tr>
-
-                {onRowRefresh()}
-            </table>
-        </div>
+        <React.Fragment>
+            <div className="filter-btn-container">
+                <div className="filter-button" onClick={onFilter}>Filter {displayFilterCount()}</div>
+            </div>
+            <section>
+                <article className="grid">
+                    {props.columns.length >= 0 &&
+                        <Grid columns={props.columns}
+                              rows={props.rows}
+                              onSort={onSort}
+                              onRowRefresh={onRowRefresh}
+                              sortMeta={sortMeta}
+                              filterMeta={filterMeta}/>}
+                </article>
+                <article className={`filter ${(isFilterOpen? 'show': 'hide')}`}>
+                    <Filter headings={filterMeta? Object.keys(filterMeta): []}
+                            filterMeta={filterMeta}
+                            filterChange={filterChange}/>
+                </article>
+            </section>
+            {/*<div className="total-container">
+                <div className="total">Total {props.rows.length}</div>
+            </div>*/}
+        </React.Fragment>
     )
 }

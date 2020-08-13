@@ -12,20 +12,16 @@ export default function HeaderCell (props) {
         return props.sortMeta[props.column.name] === 'asc' ? 'fa-angle-up': 'fa-angle-down';
     }
 
-    const headerChildClick = (e) => {
-        e.stopPropagation();
-    }
-
     return (
         <th data-column={props.column.id} data-column-name={props.column.name} onClick={props.onSort}
             className={`header-cell ${(isSortable() ? 'sortable': null)}`}>
-            <a data-column-name={props.column.name}>
+            <span data-column-name={props.column.name}>
                     {props.column.displayName}
                     {props.sortMeta[props.column.name] &&
                         <i data-column-name={props.column.name}
                             className={`fa ${getIcon()}`}></i>
                     }
-            </a>
+            </span>
         </th>
     )
 }

@@ -8,11 +8,6 @@ export default function Listing (props) {
 
     const [columns, setColumns] = useState([]);
     const [rows, setRows] = useState([]);
-    const [isFilterOpen, setToggleFilter] = useState(false);
-
-    const onFilter = () => {
-        setToggleFilter(!isFilterOpen);
-    }
 
     useEffect(() => {
         fetch("/reps/list")
@@ -33,18 +28,8 @@ export default function Listing (props) {
                     <div className="text">
                         <span>List View</span>
                     </div>
-                    <div className="filter">
-                        <a className="filter-button" onClick={onFilter}>Filter</a>
-                    </div>
                 </div>
-                <section>
-                    <article className="grid">
-                        {columns.length >= 0 && <RocketGrid columns={columns} rows={rows}/>}
-                    </article>
-                    <article className={`filter ${(isFilterOpen? 'show': 'hide')}`}>
-                        Filter
-                    </article>
-                </section>
+                <RocketGrid columns={columns} rows={rows}/>
             </div>
         </React.Fragment>
     )

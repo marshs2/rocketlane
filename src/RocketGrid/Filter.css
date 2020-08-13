@@ -1,0 +1,17 @@
+.outer-label {
+    display: inline-block;
+    width: 6em;
+}
+
+.filter-heading {
+    font-weight: 200;
+    border-bottom: 1px solid #cacaca;
+}
+
+.filter-group {
+    margin-bottom: 15px;
+}
+
+.filter-block {
+    padding: 3px 0;
+}
