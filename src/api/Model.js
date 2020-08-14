@@ -46,7 +46,7 @@ export default function Model() {
             {
                 "id": 7,
                 "name": "total",
-                "sortable": true,
+                "sortable": false,
                 "displayName": "Total",
                 "type": "number"
             }
@@ -302,5 +302,20 @@ export default function Model() {
                 "total": 589.05
             }
         ]
+    }
+}
+
+export function FilterModel() {
+    return {
+        "items": {
+            "Binder": true,
+            "Pencil": false,
+            "Pen": false
+        }, 
+        "region": {
+            "East": true,
+            "Central": false,
+            "West": false
+        }
     }
 }

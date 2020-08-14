@@ -9,14 +9,16 @@ export default function Filter (props) {
                 props.headings.map((heading, i) => {
                     return (
                         <div key={i} className="filter-group">
-                            <div className="filter-heading">{heading[0].toUpperCase().concat(heading.slice(1))}</div>
+                            <div className="filter-heading">
+                                {heading[0].toUpperCase().concat(heading.slice(1))}
+                            </div>
                             {Object.keys(props.filterMeta[heading]).map((list, i) => {
                                 return (
                                     <div key={i} className="filter-block">
                                         <div className="outer-label">
                                             <label htmlFor={list}>{list}</label>
                                         </div>
-                                        <input type="checkbox"  
+                                        <input type="checkbox"
                                             defaultChecked={props.filterMeta[heading][list]}
                                             id={list} name={list} value={list}
                                             onClick={props.filterChange}

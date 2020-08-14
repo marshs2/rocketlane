@@ -4,53 +4,23 @@ import './RocketGrid.css';
 import Grid from './Grid';
 import Filter from './Filter';
 import BodyCell from './BodyCell';
+import { FilterModel } from '../api/Model';
+
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+import { Errors }  from '../api/Errors';
 
 export default function RocketGrid (props) {
     const [isFilterOpen, setToggleFilter] = useState(false);
-    // const [columns] = useState(props.columns);
-    // const [sortMeta, setSortMeta] = useState(JSON.parse(localStorage.getItem('sort-meta')));
     const [sortMeta, setSortMeta] = useState({});
     const [typeMeta] = useState({});
     const [sortable] = useState({});
-    const [filterMeta, setFilterMeta] = useState({
-        "items": {
-            "Binder": true,
-            "Pencil": false,
-            "Pen": false
-        }, 
-        "region": {
-            "East": true,
-            "Central": false,
-            "West": false
-        } 
-    });
+    const [filterMeta, setFilterMeta] = useState({});
     const [filterCount, setFilterCount] = useState(0);
     const [totalFilterCount, setTotalFilterCount] = useState(0);
 
      useEffect(() => {
-        // if (!sortMeta) {
-        //     setSortMeta(() => {
-        //         localStorage.setItem('sort-meta', JSON.stringify({}));
-        //     });
-        // }
-
-        // if (!filterMeta) {
-        //     setFilterMeta(() => {
-        //         localStorage.setItem('filter-meta', JSON.stringify({
-        //             "items": {
-        //                 "Binder": true,
-        //                 "Pencil": false,
-        //                 "Pen": false
-        //             }, 
-        //             "region": {
-        //                 "East": true,
-        //                 "Central": false,
-        //                 "West": false
-        //             }
-        //         }))
-        //     })
-        // }
-
         if (props.columns.length) {
             props.columns.forEach((column) => {
                 typeMeta[column['name']] = column['type'];
@@ -58,7 +28,7 @@ export default function RocketGrid (props) {
             })
         }
 
-    }, [props.columns, sortMeta, typeMeta, sortable]);
+    }, [props.columns, typeMeta, sortable]);
 
     useEffect(() => {
         if (filterMeta) {
@@ -76,10 +46,41 @@ export default function RocketGrid (props) {
         }   
     }, [filterMeta]);
 
+    useEffect(() => {
+        let sortMeta = localStorage.getItem('sort-meta'),
+            filterMeta = localStorage.getItem('filter-meta'),
+            isFilterOpen = localStorage.getItem('isFilterOpen');
+        if (sortMeta) setSortMeta(JSON.parse(sortMeta));
+        if (isFilterOpen) setToggleFilter(JSON.parse(isFilterOpen));
+        if (filterMeta) {
+            setFilterMeta(JSON.parse(filterMeta))
+        } else {
+            // Get the default filter meta list if not available in LocalStorage alreadty
+            setFilterMeta(FilterModel())
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('sort-meta', JSON.stringify(sortMeta));
+        localStorage.setItem('filter-meta', JSON.stringify(filterMeta));
+        localStorage.setItem('isFilterOpen', JSON.stringify(isFilterOpen));
+    }, [sortMeta, filterMeta, isFilterOpen]);
+
     const onSort = (event) => {
         const { attributes: { "data-column-name": {nodeValue} } } = event.target;
 
-        if (!sortable[nodeValue]) return;
+        if (!sortable[nodeValue]) {
+            toast.dark(`"${nodeValue[0].toUpperCase()+nodeValue.slice(1)}" ${Errors['notSortable']}`, {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            return;
+        }
     
         let lsortMeta = {...sortMeta};
         let nextSort = '';
@@ -160,8 +161,23 @@ export default function RocketGrid (props) {
 
     const filterChange = (event) => {
         const {checked, value, attributes: { "data-group": {nodeValue: group} }} = event.target;
-        setFilterCount(checked? filterCount + 1: filterCount - 1);
-        setFilterMeta({...filterMeta, [group]: { ...filterMeta[group], [value]: checked }});
+        // Do not allow to remove the only filter
+        if (!(!checked && filterCount === 1)) {
+            setFilterCount(checked? filterCount + 1: filterCount - 1);
+            setFilterMeta({...filterMeta, [group]: { ...filterMeta[group], [value]: checked }});
+        } else {
+            event.preventDefault();
+            toast.dark(Errors['onlyFilter'], {
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+
+        }
     }
 
     const displayFilterCount = () => {
@@ -193,9 +209,19 @@ export default function RocketGrid (props) {
                             filterChange={filterChange}/>
                 </article>
             </section>
-            {/*<div className="total-container">
-                <div className="total">Total {props.rows.length}</div>
-            </div>*/}
+
+            <ToastContainer
+                position="bottom-right"
+                autoClose={2500}
+                progressClassName="toast-progress"
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </React.Fragment>
     )
 }

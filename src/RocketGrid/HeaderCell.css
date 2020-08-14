@@ -8,7 +8,7 @@
     cursor: pointer;
 }
 
-.header-cell:hover {
+.header-cell.sortable:hover {
     color: #1c46aa;
 }
 
