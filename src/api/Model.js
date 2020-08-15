@@ -46,7 +46,7 @@ export default function Model() {
             {
                 "id": 7,
                 "name": "total",
-                "sortable": false,
+                "sortable": true,
                 "displayName": "Total",
                 "type": "number"
             }
@@ -318,4 +318,235 @@ export function FilterModel() {
             "West": false
         }
     }
+}
+
+export function UserDataModel() {
+    return [
+        {
+            "id": 1,
+            "region": "East",
+            "rep": "Darren Jones",
+            "address": "Perungudi",
+            "street": "West Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 2,
+            "region": "Central",
+            "rep": "Kivell Paramasivam",
+            "address": "Perungudi",
+            "street": "East Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 3,
+            "region": "Central",
+            "rep": "Jardine Shantasami",
+            "address": "Perungudi",
+            "street": "East Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 4,
+            "region": "Central",
+            "rep": "Gill Ette",
+            "address": "Perungudi",
+            "street": "East Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 5,
+            "region": "West",
+            "rep": "Sorvino Sathappan",
+            "address": "Perungudi",
+            "street": "East Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 6,
+            "region": "East",
+            "rep": "Kannan Jones",
+            "address": "Perungudi",
+            "street": "Central Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 7,
+            "region": "Central",
+            "rep": "Peter Andrews",
+            "address": "Perungudi",
+            "street": "East Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 8,
+            "date": "5/5/2019",
+            "region": "Central",
+            "rep": "Jardine Varadhappan",
+            "address": "Perungudi",
+            "street": "West Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 9,
+            "region": "West",
+            "rep": "Thompson Peters",
+            "address": "Perungudi",
+            "street": "East Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 10,
+            "region": "East",
+            "rep": "Jones Narasim",
+            "address": "Perungudi",
+            "street": "Central Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 11,
+            "region": "Central",
+            "rep": "Abdul Morgan",
+            "address": "Perungudi",
+            "street": "South Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 12,
+            "region": "East",
+            "rep": "Jones Thiyagappan",
+            "address": "Perungudi",
+            "street": "North Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 13,
+            "region": "East",
+            "rep": "Jones Ranganathan",
+            "address": "Perungudi",
+            "street": "Central Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 14,
+            "region": "East",
+            "rep": "Jones Yogibabu",
+            "address": "Perungudi",
+            "street": "South Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 15,
+            "region": "Central",
+            "rep": "Mohammed Kivell",
+            "address": "Perungudi",
+            "street": "North Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 16,
+            "region": "Central",
+            "rep": "Jardine Rajkamal",
+            "address": "Perungudi",
+            "street": "East Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 17,
+            "region": "Central",
+            "rep": "Gill Laden",
+            "address": "Perungudi",
+            "street": "West Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 18,
+            "region": "West",
+            "rep": "Vivek Sorvino",
+            "address": "Perungudi",
+            "street": "North Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 19,
+            "region": "East",
+            "rep": "Jones Umashankar",
+            "address": "Perungudi",
+            "street": "Central Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 20,
+            "region": "Central",
+            "rep": "Andrews Parthiban",
+            "address": "Perungudi",
+            "street": "West Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 21,
+            "region": "Central",
+            "rep": "Jardine Venkat",
+            "address": "Perungudi",
+            "street": "Central Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 22,
+            "region": "West",
+            "rep": "Thompson Maarikannan",
+            "address": "Perungudi",
+            "street": "Central Street",
+            "city": "Chennai",
+            "country": "India"
+        },
+        {
+            "id": 23,
+            "region": "East",
+            "rep": "Satish Jones",
+            "address": "Perungudi",
+            "street": "Central Street",
+            "city": "Bangalore",
+            "country": "India"
+        },
+        {
+            "id": 24,
+            "region": "Central",
+            "rep": "Morgan Ramasamy",
+            "address": "Perungudi",
+            "street": "North Street",
+            "city": "Bangalore",
+            "country": "India"
+        },
+        {
+            "id": 25,
+            "region": "East",
+            "rep": "Jones Kuppusamy",
+            "address": "Perungudi",
+            "street": "East Street",
+            "city": "Bangalore",
+            "country": "India"
+        }
+    ]
 }

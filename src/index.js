@@ -1,22 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Server } from "miragejs"
 import Model from './api/Model';
+import { UserDataModel } from './api/Model';
+import RoutesWrap from './Routes';
 
 new Server({
   routes() {
     this.namespace = "/reps"
-
     this.get("/list", () => Model())
+    this.get("/users", () => UserDataModel())
   },
 })
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RoutesWrap />
   </React.StrictMode>,
   document.getElementById('root')
 );

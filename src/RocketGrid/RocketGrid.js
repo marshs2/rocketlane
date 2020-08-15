@@ -152,7 +152,7 @@ export default function RocketGrid (props) {
                 return true;
             })
             .map((row, i) => 
-                <BodyCell key={i} row={row} columns={props.columns} sortMeta={sortMeta}/> )
+                <BodyCell key={i} row={row} columns={props.columns} sortMeta={sortMeta} onRowClick={props.onRowClick}/> )
     }
 
     const onFilter = () => {
@@ -193,17 +193,18 @@ export default function RocketGrid (props) {
             <div className="filter-btn-container">
                 <div className="filter-button" onClick={onFilter}>Filter {displayFilterCount()}</div>
             </div>
-            <section>
-                <article className="grid">
+            <section className="layout">
+                <article className="main-content">
                     {props.columns.length >= 0 &&
                         <Grid columns={props.columns}
                               rows={props.rows}
                               onSort={onSort}
                               onRowRefresh={onRowRefresh}
                               sortMeta={sortMeta}
-                              filterMeta={filterMeta}/>}
+                              filterMeta={filterMeta}
+                              onRowClick={props.onRowClick}/>}
                 </article>
-                <article className={`filter ${(isFilterOpen? 'show': 'hide')}`}>
+                <article className={`side-content filter ${(isFilterOpen? 'show': 'hide')}`}>
                     <Filter headings={filterMeta? Object.keys(filterMeta): []}
                             filterMeta={filterMeta}
                             filterChange={filterChange}/>

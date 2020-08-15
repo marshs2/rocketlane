@@ -12,29 +12,41 @@ code {
     monospace;
 }
 
-
-/* SideBar Nav */
-aside {
-  height: 100%;
-  width: 60px;
-  background-color: black;
-  z-index: 0;
-  position: fixed;
+/*Overall Layout*/
+.main {
+    padding: 64px 4px 4px 64px;
+    text-align: center;
 }
 
-aside a, aside p {
-  text-decoration: none;
-  font-size: 25px;
-  color: #fff;
-  display: block;
-  font-size: 12px;
+.heading {
+    text-align: left;
+    margin: 0 4px 0 4px ;
+    display: flex;
+    align-items: center;
 }
 
-aside a:hover {
-  color: #f1f1f1;
+.heading .text {
+    flex: 60%;
 }
 
-nav {
-  margin-top: 70px;
-  text-align: left;
+/*Content Layout*/
+.main-content, .side-content {
+    margin: 4px;
+    border: 1px solid #cacaca;
+    overflow: auto;
+    height: 83vh;
+}
+
+.main-content {
+    flex: 70% 1;
+}
+
+.side-content {
+    flex: 30%;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.layout {
+    display: flex;
 }

@@ -1,49 +1,20 @@
-.grid {
-    overflow: auto;
-}
-
-article {
-    margin: 4px;
-    border: 1px solid #cacaca;
-}
-
-article.grid {
-    flex: 70% 1;
-    height: 83vh;
-}
-
-article.filter {
-    flex: 30%;
-    text-align: left;
-    padding-left: 5px;
-}
-
-article.filter label {
+.side-content.filter label {
     font-size: 12px;
 }
 
-article.filter.show {
+.side-content.filter.show {
     display: block;
 }
 
-article.filter.hide {
+.side-content.filter.hide {
     display: none;
-}
-
-
-section {
-    display: flex;
 }
 
 /*Filter*/
 .filter-btn-container {
     position: relative;
-    /* left: 92%; */
-    /* top: -20px; */
-    /* margin: -1px; */
     display: block;
     float: right;
-    /* margin: 20px; */
     left: -82px;
     top: -21px;
 }

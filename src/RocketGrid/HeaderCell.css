@@ -2,6 +2,8 @@
     border-bottom: 1px solid #cacaca;
     color: black;
     font-weight: 400;
+    cursor: not-allowed;
+    width: 1%;
 }
 
 .header-cell.sortable {

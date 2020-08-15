@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import './Listing.css';
 
-import SideBar from '../SideBar/SideBar';
 import RocketGrid from '../RocketGrid/RocketGrid';
 
 export default function Listing (props) {
 
     const [columns, setColumns] = useState([]);
     const [rows, setRows] = useState([]);
+    let history = useHistory();
 
     useEffect(() => {
         fetch("/reps/list")
@@ -18,18 +19,21 @@ export default function Listing (props) {
         })
     }, []);
 
+    const onRowClick = (event, row) => {
+        const {"data-row": {nodeValue: id}} = event.currentTarget.attributes;
+        sessionStorage.setItem('temp-row-detail', JSON.stringify(row));
+        history.push(`/reps/${id}`);
+    }
+
     return (
         <React.Fragment>
-            {/*SideBar*/}
-            <SideBar />
-
             <div className="main">
                 <div className="heading">
                     <div className="text">
                         <span>List View</span>
                     </div>
                 </div>
-                <RocketGrid columns={columns} rows={rows}/>
+                <RocketGrid columns={columns} rows={rows} onRowClick={onRowClick}/>
             </div>
         </React.Fragment>
     )
