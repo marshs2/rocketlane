@@ -1,4 +1,5 @@
 {
+  "homepage": "http://marshs2.github.io/rocketlane",
   "name": "rocket-listing",
   "version": "0.1.0",
   "private": true,
@@ -19,10 +20,25 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:fix": "eslint src/**/*.js --fix",
+    "lint": "eslint src/**/*.js",
+    "prettify": "prettier src/**/*.js --write",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended"
+    ]
+  },
+  "prettier": {
+    "printWidth": 90,
+    "bracketSpacing": true,
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true
   },
   "browserslist": {
     "production": [
@@ -37,6 +53,10 @@
     ]
   },
   "devDependencies": {
-    "miragejs": "^0.1.40"
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "gh-pages": "^3.1.0",
+    "miragejs": "^0.1.40",
+    "prettier": "^2.0.5"
   }
 }

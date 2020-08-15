@@ -1,5 +1,5 @@
 import React, { useEffect }from 'react';
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import noUser from '../assets/nouser.jpg';
 
 import './NoUserFound.css';
@@ -13,7 +13,7 @@ export default function NoUserFound(props) {
         setTimeout(() => {
             history.push(`/reps`);
         }, 5000)
-    }, [])
+    }, [history]);
 
     return (
         <div className="main no-user">
