@@ -1,19 +1,20 @@
 import React from 'react';
 import rocketlane from '../assets/rocketlane.svg';
+import { Link } from 'react-router-dom';
 
 import './Header.css';
 
-export default class Header extends React.Component {
+export default function Header (props) {
 
-    render() {
      return (
         <header className="main-header"> 
-            {/* Rocketlane Image*/}
-            <img className="logo" src={rocketlane} alt="Rocketlane Logo" height="60" width="15%"/>
+            {/*Header Logo*/}
+            <Link to="/" className="header-continer">
+                <img className="logo" src={rocketlane} alt="Rocketlane Logo"/>
+            </Link>
 
             {/*Rocketlane Application Name*/}
             <h1 className="application-name">Listing</h1>
         </header>
       )
-    }
 }

@@ -60,6 +60,7 @@ export default function RocketGrid (props) {
         }
     }, [])
 
+    // Data Persistence Effect for all data, sorting, filtering, filterOpen 
     useEffect(() => {
         localStorage.setItem('sort-meta', JSON.stringify(sortMeta));
         localStorage.setItem('filter-meta', JSON.stringify(filterMeta));
@@ -69,6 +70,7 @@ export default function RocketGrid (props) {
     const onSort = (event) => {
         const { attributes: { "data-column-name": {nodeValue} } } = event.target;
 
+        // If Column is not sortable, show Toast Message
         if (!sortable[nodeValue]) {
             toast.dark(`"${nodeValue[0].toUpperCase()+nodeValue.slice(1)}" ${Errors['notSortable']}`, {
                 position: "bottom-right",
@@ -85,6 +87,7 @@ export default function RocketGrid (props) {
         let lsortMeta = {...sortMeta};
         let nextSort = '';
 
+        // Order of Sorting is maintained here
         if (!(nodeValue in lsortMeta)) {
             lsortMeta = {[nodeValue]: 'asc'}
         } else {
@@ -111,6 +114,7 @@ export default function RocketGrid (props) {
         });
     }
 
+    // Populate the data from Persisted Data - from "Grid" Component
     const onRowRefresh = () => {
         let rows = [...props.rows];
 
@@ -121,6 +125,7 @@ export default function RocketGrid (props) {
             // Current Sort Column is determined by this
             let key = sortMetaKeys[0];
 
+            // Sort String and Number as such
             if (sortMeta[key]) {
                 if (typeMeta[key] === "string") {
                     rows.sort((a, b) => {
@@ -138,6 +143,7 @@ export default function RocketGrid (props) {
             }
         }
 
+        // Actual render, filter/map based on the sort and filter criterias 
         return rows
             .filter(row => {
                 if (filterMetaKeys.length) {

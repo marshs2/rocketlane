@@ -9,14 +9,19 @@
     align-items: center;
 }
 
-.logo {
-    margin-left: 36px;
+.header-continer {
+    flex: 10%;
+}
+
+.main-header .logo {
+    margin-left: 30px;
+    width: 210px;
 }
 
 .main-header .application-name {
     color: white;
     font-size: 20px;
-    margin-left: 70%;
     position: relative;
     top: 10%;
+    right: 8%;
 }

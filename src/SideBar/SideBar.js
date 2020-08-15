@@ -6,6 +6,7 @@ export default class SideBar extends React.Component {
 
     render() {
      return (
+        //  Dummy Nav links
         <aside>
             <nav>
             <a href="http://www.rocketlane.com" target="_blank" rel="noopener noreferrer"> <p>About Us</p> </a>

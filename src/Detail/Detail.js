@@ -7,16 +7,21 @@ import {
 
 import './Detail.css';
 import placeholder from '../assets/placeholder.png';
+import NoUserFound from './NoUserFound';
 
 export default function Detail (props) {
     const [rowDetail, setRowDetail] = useState({});
+    const [noUserFound, setNoUserFound] = useState(false);
+    const [userAvailable, setUserAvailable] = useState(false);
     let { rep_id } = useParams();
 
+    // If User came from Listing page, show that Data, else, get from Users API (User API has more details eg. Addr)
     useEffect(() => {
         let row = sessionStorage.getItem('temp-row-detail');
         if (row) {
             sessionStorage.removeItem('temp-row-detail');
             setRowDetail(JSON.parse(row));
+            setUserAvailable(true);
         } else {
             fetch("/reps/users")
             .then((res) => res.json())
@@ -24,13 +29,20 @@ export default function Detail (props) {
                 let rowList = json.filter((row) => {
                     return parseInt(row['id']) === parseInt(rep_id);
                 });
-                if (rowList.length) setRowDetail(rowList[0]);
-            })
+                // If User is not available in both cases, mark as NoUserFound
+                if (rowList.length) {
+                    setRowDetail(rowList[0]);
+                    setUserAvailable(true);
+                } else {
+                    setNoUserFound(true);
+                }
+            });
         };
     }, [rep_id]);
 
     return (
         <React.Fragment>
+            {userAvailable &&
             <div className="main">
                 <div className="heading">
                     <div className="text">
@@ -44,6 +56,7 @@ export default function Detail (props) {
                         <article className="main-content detail">
                             <div className="detail-main">
                                 <div className="image-holder ">
+                                    {/*Dummy Photo Image viwer*/}
                                     {rowDetail.id &&
                                         <img src={`https://randomuser.me/api/portraits/men/${rowDetail.id}.jpg`}
                                              alt="Representative's face"
@@ -73,7 +86,10 @@ export default function Detail (props) {
                         </article>
                     </section>
                 </div>
-            </div>
+            </div>}
+            {noUserFound &&
+                <NoUserFound />
+            }
         </React.Fragment>
     )
 }

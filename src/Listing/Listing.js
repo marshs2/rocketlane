@@ -19,6 +19,7 @@ export default function Listing (props) {
         })
     }, []);
 
+    // Save the current row details in Session storage and navigate to Details page on Rep column Click
     const onRowClick = (event, row) => {
         const {"data-row": {nodeValue: id}} = event.currentTarget.attributes;
         sessionStorage.setItem('temp-row-detail', JSON.stringify(row));
