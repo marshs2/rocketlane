@@ -1,0 +1,40 @@
+.side-content.filter label {
+    font-size: 12px;
+}
+
+.side-content.filter.show {
+    display: block;
+}
+
+.side-content.filter.hide {
+    display: none;
+}
+
+/*Filter*/
+.filter-btn-container {
+    position: relative;
+    display: block;
+    float: right;
+    left: -82px;
+    top: -21px;
+}
+
+.filter-btn-container .filter-button {
+    background: #2764f5;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+    width: 70px;
+    display: block;
+    position: absolute;
+}
+
+/*Toast*/
+.Toastify__toast-body {
+    font-size: 13px;
+}
+
+.Toastify__progress-bar.Toastify__progress-bar--dark.toast-progress {
+    background: #1c46aa;
+}

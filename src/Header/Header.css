@@ -1,0 +1,27 @@
+/* Header */
+.main-header {
+    position: fixed;
+    height: 60px;
+    width: 100%;
+    background-color: black;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+
+.header-continer {
+    flex: 10%;
+}
+
+.main-header .logo {
+    margin-left: 30px;
+    width: 210px;
+}
+
+.main-header .application-name {
+    color: white;
+    font-size: 20px;
+    position: relative;
+    top: 10%;
+    right: 8%;
+}

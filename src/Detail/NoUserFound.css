@@ -1,0 +1,8 @@
+.main.no-user {
+    background: #f8f8f8;
+}
+
+.main.no-user img {
+    width: fit-content;
+    height: -webkit-fill-available;
+}

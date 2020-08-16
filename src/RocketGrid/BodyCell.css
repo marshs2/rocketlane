@@ -1,0 +1,12 @@
+.rocket-row {
+    background: white;
+    color: #787373;
+}
+
+.rocket-row:hover {
+    background: #ebf3f5;
+}
+
+td[data-row] {
+    cursor: pointer;
+}

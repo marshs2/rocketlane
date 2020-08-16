@@ -1,0 +1,21 @@
+.header-cell {
+    border-bottom: 1px solid #cacaca;
+    color: black;
+    font-weight: 400;
+    cursor: not-allowed;
+    width: 1%;
+}
+
+.header-cell.sortable {
+    cursor: pointer;
+}
+
+.header-cell.sortable:hover {
+    color: #1c46aa;
+}
+
+.header-cell i {
+    margin-left: 12px;
+    color: #2764f5;
+    font-size: 15px;
+}
