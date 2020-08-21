@@ -11,14 +11,14 @@ const Listing = (props) => {
     let history = useHistory();
 
     // Save the current row details in Session storage and navigate to Details page on Rep column Click
-    const onRowClick = (event, row) => {
+    const onRepClick = (event, row) => {
         const {"data-row": {nodeValue: id}} = event.currentTarget.attributes;
         sessionStorage.setItem('temp-row-detail', JSON.stringify(row));
         history.push(`/reps/${id}`);
     }
 
     const clickOptions = {
-        'rep': onRowClick
+        'rep': onRepClick
     }
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const Listing = (props) => {
                         <span>List View</span>
                     </div>
                 </div>
-                <RocketGrid columns={columns} rows={rows} onRowClick={onRowClick} clickOptions={clickOptions} />
+                <RocketGrid columns={columns} rows={rows} onRepClick={onRepClick} clickOptions={clickOptions} />
             </div>
         </React.Fragment>
     )

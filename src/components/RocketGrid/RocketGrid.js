@@ -207,8 +207,7 @@ const RocketGrid = (props) => {
                               onSort={onSort}
                               onRowRefresh={onRowRefresh}
                               sortMeta={sortMeta}
-                              filterMeta={filterMeta}
-                              onRowClick={props.onRowClick}/>}
+                              filterMeta={filterMeta}/>}
                 </article>
                 <article className={`side-content filter ${(isFilterOpen? 'show': 'hide')}`}>
                     <Filter headings={filterMeta? Object.keys(filterMeta): []}
