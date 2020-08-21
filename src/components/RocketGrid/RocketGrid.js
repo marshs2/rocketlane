@@ -195,7 +195,7 @@ const RocketGrid = (props) => {
     }
 
     return (
-        <React.Fragment>
+        <>
             <div className="filter-btn-container">
                 <div className="filter-button" onClick={onFilter}>Filter {displayFilterCount()}</div>
             </div>
@@ -228,7 +228,7 @@ const RocketGrid = (props) => {
                 draggable
                 pauseOnHover
             />
-        </React.Fragment>
+        </>
     )
 }
 

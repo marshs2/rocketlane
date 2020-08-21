@@ -30,7 +30,7 @@ const Listing = (props) => {
     }, []);
 
     return (
-        <React.Fragment>
+        <>
             <div className="main">
                 <div className="heading">
                     <div className="text">
@@ -39,7 +39,7 @@ const Listing = (props) => {
                 </div>
                 <RocketGrid columns={columns} rows={rows} onRepClick={onRepClick} clickOptions={clickOptions} />
             </div>
-        </React.Fragment>
+        </>
     )
 }
 

@@ -12,7 +12,7 @@ const BodyCell = ({ row, columns, clickOptions }) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <tr className={`rocket-row ${addAlternateClass(row)}`}>
         {columns.map((column, i) => {
           const conditionalParams = {}
@@ -34,7 +34,7 @@ const BodyCell = ({ row, columns, clickOptions }) => {
           )
         })}
       </tr>
-    </React.Fragment>
+    </>
   )
 }
 

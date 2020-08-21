@@ -41,7 +41,7 @@ const Detail = (props) => {
     }, [rep_id]);
 
     return (
-        <React.Fragment>
+        <>
             {userAvailable &&
             <div className="main">
                 <div className="heading">
@@ -66,17 +66,17 @@ const Detail = (props) => {
                                 <div className="details">
                                     <div className="name-field">{rowDetail.rep}</div><br/>
                                     {Object.keys(rowDetail).length?
-                                        <React.Fragment>
+                                        <>
                                             <div>Region: {rowDetail.region}</div><br/>
                                             {rowDetail.address &&
-                                            <React.Fragment>
+                                            <>
                                                 <div>Address: {rowDetail.address}</div>
                                                 <div>Street: {rowDetail.street}</div>
                                                 <div>City: {rowDetail.city}</div>
                                                 <div>Country: {rowDetail.country}</div>
-                                            </React.Fragment>
+                                            </>
                                             }
-                                        </React.Fragment>: null
+                                        </>: null
                                     }
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ const Detail = (props) => {
             {noUserFound &&
                 <NoUserFound />
             }
-        </React.Fragment>
+        </>
     )
 }
 
