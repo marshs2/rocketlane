@@ -2,7 +2,7 @@ import React from 'react';
 
 import './Filter.css';
 
-export default function Filter (props) {
+const Filter = (props) => {
     return (
         <React.Fragment>
             {/*Show the filter data (hardcoded in API) in filter pane */}
@@ -34,3 +34,5 @@ export default function Filter (props) {
         </React.Fragment>
     )
 }
+
+export default Filter;

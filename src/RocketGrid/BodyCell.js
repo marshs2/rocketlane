@@ -3,7 +3,7 @@ import './RocketGrid.css';
 
 import './BodyCell.css';
 
-export default function BodyCell (props) {
+const BodyCell = (props) =>  {
 
     return (
         <React.Fragment>
@@ -24,3 +24,5 @@ export default function BodyCell (props) {
         </React.Fragment>
     )
 }
+
+export default BodyCell;

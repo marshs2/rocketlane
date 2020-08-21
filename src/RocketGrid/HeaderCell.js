@@ -2,7 +2,7 @@ import React from 'react';
 import './RocketGrid.css';
 import './HeaderCell.css';
 
-export default function HeaderCell (props) {
+const HeaderCell = (props) => {
 
     const isSortable = () => {
         return props.column.sortable;
@@ -25,3 +25,5 @@ export default function HeaderCell (props) {
         </th>
     )
 }
+
+export default HeaderCell;

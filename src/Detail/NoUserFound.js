@@ -4,7 +4,7 @@ import noUser from '../assets/nouser.jpg';
 
 import './NoUserFound.css';
 
-export default function NoUserFound(props) {
+const NoUserFound = (props) => {
     
     let history = useHistory();
 
@@ -22,3 +22,5 @@ export default function NoUserFound(props) {
         </div>
     )
 }
+
+export default NoUserFound;

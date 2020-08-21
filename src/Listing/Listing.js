@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
+import axios from 'axios';
 import './Listing.css';
 
 import RocketGrid from '../RocketGrid/RocketGrid';
 
-export default function Listing (props) {
-
+const Listing = (props) => {
     const [columns, setColumns] = useState([]);
     const [rows, setRows] = useState([]);
     let history = useHistory();
 
     useEffect(() => {
-        fetch("/reps/list")
-        .then((res) => res.json())
-        .then((json) => {
-            setColumns(json['columns']);
-            setRows(json['rows']);
+        axios.get("/reps/list")
+        .then(({data}) => {
+            setColumns(data['columns']);
+            setRows(data['rows']);
         })
     }, []);
 
@@ -39,3 +38,5 @@ export default function Listing (props) {
         </React.Fragment>
     )
 }
+
+export default Listing;

@@ -4,12 +4,13 @@ import {
   useParams,
   Link
 } from "react-router-dom";
+import axios from 'axios';
 
 import './Detail.css';
 import placeholder from '../assets/placeholder.png';
 import NoUserFound from './NoUserFound';
 
-export default function Detail (props) {
+const Detail = (props) => {
     const [rowDetail, setRowDetail] = useState({});
     const [noUserFound, setNoUserFound] = useState(false);
     const [userAvailable, setUserAvailable] = useState(false);
@@ -23,10 +24,9 @@ export default function Detail (props) {
             setRowDetail(JSON.parse(row));
             setUserAvailable(true);
         } else {
-            fetch("/reps/users")
-            .then((res) => res.json())
-            .then((json) => {
-                let rowList = json.filter((row) => {
+            axios.get("/reps/users")
+            .then(({data}) => {
+                let rowList = data.filter((row) => {
                     return parseInt(row['id']) === parseInt(rep_id);
                 });
                 // If User is not available in both cases, mark as NoUserFound
@@ -93,3 +93,5 @@ export default function Detail (props) {
         </React.Fragment>
     )
 }
+
+export default Detail;

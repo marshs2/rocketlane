@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './Header.css';
 
-export default function Header (props) {
+const Header = (props) => {
 
      return (
         <header className="main-header"> 
@@ -18,3 +18,5 @@ export default function Header (props) {
         </header>
       )
 }
+
+export default Header;

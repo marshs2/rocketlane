@@ -4,7 +4,7 @@ import './Grid.css';
 
 import HeaderCell from './HeaderCell';
 
-export default function Grid (props) {
+const Grid = (props) => {
 
     return (
         <div className="grid">
@@ -20,3 +20,5 @@ export default function Grid (props) {
         </div>
     )
 }
+
+export default Grid;

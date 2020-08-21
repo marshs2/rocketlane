@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Errors }  from '../api/Errors';
 
-export default function RocketGrid (props) {
+const RocketGrid = (props) => {
     const [isFilterOpen, setToggleFilter] = useState(false);
     const [sortMeta, setSortMeta] = useState({});
     const [typeMeta] = useState({});
@@ -232,3 +232,5 @@ export default function RocketGrid (props) {
         </React.Fragment>
     )
 }
+
+export default RocketGrid;
