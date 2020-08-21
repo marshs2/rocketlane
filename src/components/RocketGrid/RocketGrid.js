@@ -158,7 +158,7 @@ const RocketGrid = (props) => {
                 return true;
             })
             .map((row, i) => 
-                <BodyCell key={i} row={row} columns={props.columns} sortMeta={sortMeta} onRowClick={props.onRowClick}/> )
+                <BodyCell key={i} row={row} columns={props.columns} sortMeta={sortMeta} clickOptions={props.clickOptions}/> )
     }
 
     const onFilter = () => {

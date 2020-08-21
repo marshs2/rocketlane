@@ -10,20 +10,24 @@ const Listing = (props) => {
     const [rows, setRows] = useState([]);
     let history = useHistory();
 
-    useEffect(() => {
-        axios.get("/reps/list")
-        .then(({data}) => {
-            setColumns(data['columns']);
-            setRows(data['rows']);
-        })
-    }, []);
-
     // Save the current row details in Session storage and navigate to Details page on Rep column Click
     const onRowClick = (event, row) => {
         const {"data-row": {nodeValue: id}} = event.currentTarget.attributes;
         sessionStorage.setItem('temp-row-detail', JSON.stringify(row));
         history.push(`/reps/${id}`);
     }
+
+    const clickOptions = {
+        'rep': onRowClick
+    }
+
+    useEffect(() => {
+        (async () => {
+            let { data } = await axios.get("/reps/list");
+            setColumns(data['columns']);
+            setRows(data['rows']);
+        })();
+    }, []);
 
     return (
         <React.Fragment>
@@ -33,7 +37,7 @@ const Listing = (props) => {
                         <span>List View</span>
                     </div>
                 </div>
-                <RocketGrid columns={columns} rows={rows} onRowClick={onRowClick}/>
+                <RocketGrid columns={columns} rows={rows} onRowClick={onRowClick} clickOptions={clickOptions} />
             </div>
         </React.Fragment>
     )

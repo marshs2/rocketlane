@@ -24,8 +24,8 @@ const Detail = (props) => {
             setRowDetail(JSON.parse(row));
             setUserAvailable(true);
         } else {
-            axios.get("/reps/users")
-            .then(({data}) => {
+            (async () => {
+                const { data } = axios.get("/reps/users");
                 let rowList = data.filter((row) => {
                     return parseInt(row['id']) === parseInt(rep_id);
                 });
@@ -36,7 +36,7 @@ const Detail = (props) => {
                 } else {
                     setNoUserFound(true);
                 }
-            });
+            })();
         };
     }, [rep_id]);
 
