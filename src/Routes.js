@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Listing from './components/Listing/Listing';
 import Detail from './components/Detail/Detail';
-import NotFoundPage from './components/404/NotFoundPage';
+import NotFoundPage from './components/NoPage/NoPage';
 import Header from './components/Header/Header';
 import SideBar from './components/SideBar/SideBar';
 

@@ -1,11 +1,13 @@
 import React from 'react';
 
-import './NotFoundPage.css';
+import './NoPage.css';
 
-export default function NotFoundPage() {
+const NoPage = () => {
     return (
         <div className="main">
             <p class="error-404">404, Not Found</p>
         </div>
     )
 }
+
+export default NoPage;
