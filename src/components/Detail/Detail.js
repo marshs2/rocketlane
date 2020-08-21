@@ -7,7 +7,7 @@ import {
 import axios from 'axios';
 
 import './Detail.css';
-import placeholder from '../assets/placeholder.png';
+import placeholder from '../../assets/placeholder.png';
 import NoUserFound from './NoUserFound';
 
 const Detail = (props) => {

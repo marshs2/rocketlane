@@ -4,12 +4,12 @@ import './RocketGrid.css';
 import Grid from './Grid';
 import Filter from './Filter';
 import BodyCell from './BodyCell';
-import { FilterModel } from '../api/Model';
+import { FilterModel } from '../../api/Model';
 
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Errors }  from '../api/Errors';
+import { Errors }  from '../../api/Errors';
 
 const RocketGrid = (props) => {
     const [isFilterOpen, setToggleFilter] = useState(false);

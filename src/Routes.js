@@ -5,11 +5,11 @@ import {
   Route,
   Switch
 } from "react-router-dom";
-import Listing from './Listing/Listing';
-import Detail from './Detail/Detail';
-import NotFoundPage from './NotFoundPage';
-import Header from './Header/Header';
-import SideBar from './SideBar/SideBar';
+import Listing from './components/Listing/Listing';
+import Detail from './components/Detail/Detail';
+import NotFoundPage from './components/404/NotFoundPage';
+import Header from './components/Header/Header';
+import SideBar from './components/SideBar/SideBar';
 
 const RoutesWrap = () => {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import rocketlane from '../assets/rocketlane.svg';
+import rocketlane from '../../assets/rocketlane.svg';
 import { Link } from 'react-router-dom';
 
 import './Header.css';
