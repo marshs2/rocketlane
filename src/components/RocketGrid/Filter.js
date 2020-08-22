@@ -2,15 +2,15 @@ import React from 'react'
 
 import './Filter.css'
 
-const Filter = ({headings, filterMeta, filterChange}) => {
+const Filter = ({filterMeta, filterChange, columnNameMeta}) => {
   return (
     <>
       {/*Show the filter data (hardcoded in API) in filter pane */}
-      {headings.map((heading, i) => {
+      {Object.keys(filterMeta).map((heading, i) => {
         return (
           <div key={i} className="filter-group">
             <div className="filter-heading">
-              {heading[0].toUpperCase().concat(heading.slice(1))}
+              {columnNameMeta[heading]}
             </div>
             {Object.keys(filterMeta[heading]).map((list, i) => {
               return (

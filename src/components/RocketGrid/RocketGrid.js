@@ -11,47 +11,34 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Errors }  from '../../api/Errors';
 
-const RocketGrid = (props) => {
-    const [isFilterOpen, setToggleFilter] = useState(false);
-    const [sortMeta, setSortMeta] = useState({});
-    const [typeMeta] = useState({});
-    const [sortable] = useState({});
+const RocketGrid = ({ columns, rows, clickOptions }) => {
+    const [isFilterOpen, setFilterOpen] = useState(false);
     const [filterMeta, setFilterMeta] = useState({});
     const [filterCount, setFilterCount] = useState(0);
     const [totalFilterCount, setTotalFilterCount] = useState(0);
+    // To ensure we search only on groups where there is atleast one filter selected
+    const [filterGroupWithValues, setFilterGroupWithValues] = useState({});
+    const [sortMeta, setSortMeta] = useState({});
 
-     useEffect(() => {
-        if (props.columns.length) {
-            props.columns.forEach((column) => {
-                typeMeta[column['name']] = column['type'];
-                sortable[column['name']] = column['sortable'];
-            })
-        }
+    const typeMeta = {}; // Eg. { region: string, units: number... }
+    const sortable = {}; // Eg. { date: false, unitcost: true... }
+    const columnNameMeta = {};
 
-    }, [props.columns, typeMeta, sortable]);
-
-    useEffect(() => {
-        if (filterMeta) {
-            let filterCount = 0, totalFilterCount = 0;
-            Object.keys(filterMeta).forEach(group => {
-                Object.keys(filterMeta[group]).forEach((list) => {
-                    totalFilterCount++;
-                    if (filterMeta[group][list]) {
-                        filterCount++;
-                    }
-                })
-            });
-            setFilterCount(() => filterCount);
-            setTotalFilterCount(() => totalFilterCount);
-        }   
-    }, [filterMeta]);
+    // Get the latest sortable and typeMeta data on every render of Grid
+    if (columns.length) {
+        columns.forEach((column) => {
+            typeMeta[column['name']] = column['type'];
+            sortable[column['name']] = column['sortable'];
+            columnNameMeta[column['name']] = column['displayName'];
+        });
+    }
 
     useEffect(() => {
         let sortMeta = localStorage.getItem('sort-meta'),
             filterMeta = localStorage.getItem('filter-meta'),
             isFilterOpen = localStorage.getItem('isFilterOpen');
         if (sortMeta) setSortMeta(JSON.parse(sortMeta));
-        if (isFilterOpen) setToggleFilter(JSON.parse(isFilterOpen));
+        if (isFilterOpen) setFilterOpen(JSON.parse(isFilterOpen));
         if (filterMeta) {
             setFilterMeta(JSON.parse(filterMeta))
         } else {
@@ -60,6 +47,26 @@ const RocketGrid = (props) => {
         }
     }, [])
 
+    useEffect(() => {
+        if (filterMeta) {
+            let filterCount = 0, totalFilterCount = 0, lfilterGroupWithValues = {};
+            Object.keys(filterMeta).forEach(group => {
+                Object.keys(filterMeta[group]).forEach((list) => {
+                    totalFilterCount++;
+                    if (filterMeta[group][list]) {
+                        filterCount++;
+                    }
+                    if (filterMeta[group][list]) {
+                        lfilterGroupWithValues[group] = true;
+                    }
+                    setFilterGroupWithValues(lfilterGroupWithValues);
+                })
+            });
+            setFilterCount(filterCount);
+            setTotalFilterCount(totalFilterCount);
+        }   
+    }, [filterMeta]);
+
     // Data Persistence Effect for all data, sorting, filtering, filterOpen 
     useEffect(() => {
         localStorage.setItem('sort-meta', JSON.stringify(sortMeta));
@@ -67,63 +74,61 @@ const RocketGrid = (props) => {
         localStorage.setItem('isFilterOpen', JSON.stringify(isFilterOpen));
     }, [sortMeta, filterMeta, isFilterOpen]);
 
-    const onSort = (event) => {
-        const { attributes: { "data-column-name": {nodeValue} } } = event.target;
+    const onSort = (event, ref) => {
 
-        // If Column is not sortable, show Toast Message
-        if (!sortable[nodeValue]) {
-            toast.dark(`"${nodeValue[0].toUpperCase()+nodeValue.slice(1)}" ${Errors['notSortable']}`, {
-                position: "bottom-right",
-                autoClose: 2500,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-            return;
-        }
-    
-        let lsortMeta = {...sortMeta};
-        let nextSort = '';
+        if (ref.current.contains(event.target)){
+            const nodeContent = ref.current.textContent;
+            const { attributes: { "data-column-name": {nodeValue} } } = ref.current;
 
-        // Order of Sorting is maintained here
-        if (!(nodeValue in lsortMeta)) {
-            lsortMeta = {[nodeValue]: 'asc'}
-        } else {
-            switch (lsortMeta[nodeValue]) {
-                case '': 
-                    nextSort = 'asc';
-                    break;
-                case 'asc':
-                    nextSort = 'desc'
-                    break;
-                case 'desc':
-                    nextSort = ''
-                    break;
-
-                default:
-                    break;
+            // If Column is not sortable, show Toast Message
+            if (!sortable[nodeValue]) {
+                toast.dark(`"${nodeContent}" ${Errors['notSortable']}`, {
+                    position: "bottom-right",
+                    autoClose: 2500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                return;
             }
-            lsortMeta[nodeValue] = nextSort;
-        }
 
-        setSortMeta(() => {
-            localStorage.setItem('sort-meta', JSON.stringify(lsortMeta));
-            return lsortMeta;
-        });
+            // Order of Sorting is maintained here
+            if (!(nodeValue in sortMeta)) {
+                setSortMeta({[nodeValue]: 'asc'});
+            } else {
+                let nextSort;
+
+                switch (sortMeta[nodeValue]) {
+                    case '': 
+                        nextSort = 'asc';
+                        break;
+                    case 'asc':
+                        nextSort = 'desc'
+                        break;
+                    case 'desc':
+                        nextSort = ''
+                        break;
+
+                    default:
+                        break;
+                }
+
+                setSortMeta({...sortMeta, [nodeValue]: nextSort});
+
+            }
+        }
     }
 
     // Populate the data from Persisted Data - from "Grid" Component
     const onRowRefresh = () => {
-        let rows = [...props.rows];
-
+        rows = [...rows];
         let sortMetaKeys = sortMeta ? Object.keys(sortMeta): {};
-        let filterMetaKeys = filterMeta ? Object.keys(filterMeta): {};
 
         if (rows.length && sortMetaKeys.length) {
             // Current Sort Column is determined by this
-            let key = sortMetaKeys[0];
+            let key = sortMetaKeys[0]; // Eg. { units: 'asc' } 
 
             // Sort String and Number as such
             if (sortMeta[key]) {
@@ -144,25 +149,27 @@ const RocketGrid = (props) => {
         }
 
         // Actual render, filter/map based on the sort and filter criterias 
+        console.log(filterGroupWithValues);
         return rows
             .filter(row => {
-                if (filterMetaKeys.length) {
-                    for (let i = 0; i < filterMetaKeys.length; i++) {
-                        if (filterMeta[filterMetaKeys[i]][row[filterMetaKeys[i]]]) {
-                            return true;
+                // row - { date: '1/16/20', items: 'Pencil' ..}
+                // filterMeta - { items: {binder: false, Pencil: true..}, ...} 
+                let rowKeys = Object.keys(row);
+                for (let i = 0; i < rowKeys.length; i++) {
+                    if (rowKeys[i] in filterMeta && rowKeys[i] in filterGroupWithValues) {
+                        if (!filterMeta[rowKeys[i]][row[rowKeys[i]]]) {
+                            return false;
                         }
                     }
-                    return false;
                 }
-    
                 return true;
             })
             .map((row, i) => 
-                <BodyCell key={i} row={row} columns={props.columns} sortMeta={sortMeta} clickOptions={props.clickOptions}/> )
+                <BodyCell key={i} row={row} columns={columns} sortMeta={sortMeta} clickOptions={clickOptions}/> )
     }
 
     const onFilter = () => {
-        setToggleFilter(!isFilterOpen);
+        setFilterOpen(!isFilterOpen);
     }
 
     const filterChange = (event) => {
@@ -201,18 +208,18 @@ const RocketGrid = (props) => {
             </div>
             <section className="layout">
                 <article className="main-content">
-                    {props.columns.length >= 0 &&
-                        <Grid columns={props.columns}
-                              rows={props.rows}
+                    {columns.length >= 0 &&
+                        <Grid columns={columns}
+                              rows={rows}
                               onSort={onSort}
                               onRowRefresh={onRowRefresh}
                               sortMeta={sortMeta}
                               filterMeta={filterMeta}/>}
                 </article>
                 <article className={`side-content filter ${(isFilterOpen? 'show': 'hide')}`}>
-                    <Filter headings={filterMeta? Object.keys(filterMeta): []}
-                            filterMeta={filterMeta}
-                            filterChange={filterChange}/>
+                    <Filter filterMeta={filterMeta}
+                            filterChange={filterChange}
+                            columnNameMeta={columnNameMeta}/>
                 </article>
             </section>
 

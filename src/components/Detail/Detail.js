@@ -25,7 +25,7 @@ const Detail = (props) => {
             setUserAvailable(true);
         } else {
             (async () => {
-                const { data } = axios.get("/reps/users");
+                const { data } = await axios.get("/reps/users");
                 let rowList = data.filter((row) => {
                     return parseInt(row['id']) === parseInt(rep_id);
                 });
