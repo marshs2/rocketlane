@@ -23,9 +23,10 @@ const BodyCell = ({ row, columns, clickOptions }) => {
             column.name in clickOptions &&
             typeof clickOptions[column.name] === 'function'
           ) {
-            conditionalParams['onClick'] = (event) =>
+            conditionalParams['onClick'] = (event) => {
               clickOptions[column.name](event, row)
-            conditionalParams['data-row'] = row['id']
+            };
+            conditionalParams['data-row'] = row['id'];
           }
           return (
             <td key={i} {...conditionalParams}>

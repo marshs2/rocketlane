@@ -11,12 +11,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { Errors }  from '../../api/Errors';
 
-const RocketGrid = ({ columns, rows, clickOptions }) => {
+const RocketGrid = ({ id, columns, rows, clickOptions }) => {
     const [isFilterOpen, setFilterOpen] = useState(false);
     const [filterMeta, setFilterMeta] = useState({});
     const [filterCount, setFilterCount] = useState(0);
     const [totalFilterCount, setTotalFilterCount] = useState(0);
-    // To ensure we search only on groups where there is atleast one filter selected
+    // To ensure we search only on filter groups where there is atleast one filter selected
     const [filterGroupWithValues, setFilterGroupWithValues] = useState({});
     const [sortMeta, setSortMeta] = useState({});
 
@@ -34,18 +34,21 @@ const RocketGrid = ({ columns, rows, clickOptions }) => {
     }
 
     useEffect(() => {
-        let sortMeta = localStorage.getItem('sort-meta'),
-            filterMeta = localStorage.getItem('filter-meta'),
-            isFilterOpen = localStorage.getItem('isFilterOpen');
-        if (sortMeta) setSortMeta(JSON.parse(sortMeta));
-        if (isFilterOpen) setFilterOpen(JSON.parse(isFilterOpen));
-        if (filterMeta) {
-            setFilterMeta(JSON.parse(filterMeta))
+        let gridData = localStorage.getItem(`${id}`) ? JSON.parse(localStorage.getItem(`${id}`)): null;
+        if (gridData) {
+            let sortMeta = gridData['sort-meta'],
+                filterMeta = gridData['filter-meta'],
+                isFilterOpen = gridData['isFilterOpen'];
+            if (isFilterOpen) setFilterOpen(isFilterOpen);
+            if (Object.keys(sortMeta).length) setSortMeta(sortMeta);
+            if (Object.keys(filterMeta).length) {
+                setFilterMeta(filterMeta);
+            }
         } else {
-            // Get the default filter meta list if not available in LocalStorage alreadty
+            // Get Initial configuration
             setFilterMeta(FilterModel())
         }
-    }, [])
+    }, [id]);
 
     useEffect(() => {
         if (filterMeta) {
@@ -69,10 +72,14 @@ const RocketGrid = ({ columns, rows, clickOptions }) => {
 
     // Data Persistence Effect for all data, sorting, filtering, filterOpen 
     useEffect(() => {
-        localStorage.setItem('sort-meta', JSON.stringify(sortMeta));
-        localStorage.setItem('filter-meta', JSON.stringify(filterMeta));
-        localStorage.setItem('isFilterOpen', JSON.stringify(isFilterOpen));
-    }, [sortMeta, filterMeta, isFilterOpen]);
+        let saveGrid = {
+                'sort-meta': sortMeta,
+                'filter-meta': filterMeta,
+                'isFilterOpen': isFilterOpen
+        }
+        localStorage.setItem(`${id}`, JSON.stringify(saveGrid));
+
+    }, [sortMeta, filterMeta, isFilterOpen, id]);
 
     const onSort = (event, ref) => {
 
@@ -148,9 +155,8 @@ const RocketGrid = ({ columns, rows, clickOptions }) => {
             }
         }
 
-        // Actual render, filter/map based on the sort and filter criterias 
-        console.log(filterGroupWithValues);
-        return rows
+        // Filter
+        const filtered = rows
             .filter(row => {
                 // row - { date: '1/16/20', items: 'Pencil' ..}
                 // filterMeta - { items: {binder: false, Pencil: true..}, ...} 
@@ -163,9 +169,15 @@ const RocketGrid = ({ columns, rows, clickOptions }) => {
                     }
                 }
                 return true;
-            })
-            .map((row, i) => 
-                <BodyCell key={i} row={row} columns={columns} sortMeta={sortMeta} clickOptions={clickOptions}/> )
+            });
+
+        // Actual render, filter/map based on the sort and filter criterias 
+        return rows.length ? 
+                    filtered.length ? 
+                        filtered.map((row, i) => 
+                            <BodyCell key={i} row={row} columns={columns} sortMeta={sortMeta} clickOptions={clickOptions}/>)
+                        : <tr><td className="grid-text" colSpan="100%">No Data Found</td></tr>
+                    : <tr><td className="grid-text" colSpan="100%">Loading...</td></tr>;
     }
 
     const onFilter = () => {

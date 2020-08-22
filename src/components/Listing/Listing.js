@@ -5,7 +5,7 @@ import './Listing.css';
 
 import RocketGrid from '../RocketGrid/RocketGrid';
 
-const Listing = (props) => {
+const Listing = () => {
     const [columns, setColumns] = useState([]);
     const [rows, setRows] = useState([]);
     let history = useHistory();
@@ -37,7 +37,13 @@ const Listing = (props) => {
                         <span>List View</span>
                     </div>
                 </div>
-                <RocketGrid columns={columns} rows={rows} onRepClick={onRepClick} clickOptions={clickOptions} />
+                <RocketGrid
+                    id="xyz"
+                    columns={columns}
+                    rows={rows}
+                    onRepClick={onRepClick}
+                    clickOptions={clickOptions}
+                />
             </div>
         </>
     )
