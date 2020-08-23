@@ -155,6 +155,10 @@ const RocketGrid = ({ id, columns, rows, clickOptions }) => {
             }
         }
 
+        if (!rows.length) {
+            return <tr><td className="grid-text" colSpan="100%">Loading...</td></tr>;
+        }
+
         // Filter
         const filtered = rows
             .filter(row => {
@@ -172,12 +176,10 @@ const RocketGrid = ({ id, columns, rows, clickOptions }) => {
             });
 
         // Actual render, filter/map based on the sort and filter criterias 
-        return rows.length ? 
-                    filtered.length ? 
-                        filtered.map((row, i) => 
-                            <BodyCell key={i} row={row} columns={columns} sortMeta={sortMeta} clickOptions={clickOptions}/>)
-                        : <tr><td className="grid-text" colSpan="100%">No Data Found</td></tr>
-                    : <tr><td className="grid-text" colSpan="100%">Loading...</td></tr>;
+        return filtered.length ? 
+                    filtered.map((row, i) => 
+                        <BodyCell key={i} row={row} columns={columns} sortMeta={sortMeta} clickOptions={clickOptions}/>)
+                    : <tr><td className="grid-text" colSpan="100%">No Data Found</td></tr>;
     }
 
     const onFilter = () => {
