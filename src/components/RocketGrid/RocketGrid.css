@@ -38,3 +38,7 @@
 .Toastify__progress-bar.Toastify__progress-bar--dark.toast-progress {
     background: #1c46aa;
 }
+
+.grid-text {
+    padding: 25px;
+}

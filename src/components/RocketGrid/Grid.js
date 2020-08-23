@@ -1,22 +1,24 @@
 import React from 'react';
-// import './RocketGrid.css';
+
 import './Grid.css';
 
 import HeaderCell from './HeaderCell';
 
-export default function Grid (props) {
+const Grid = ({onRowRefresh, columns, onSort, sortMeta}) => {
 
     return (
         <div className="grid">
             <table className="grid-table">
                 <tbody>
                     <tr>
-                        {props.columns.map((column, i) => 
-                            <HeaderCell key={i} column={column} onSort={props.onSort} sortMeta={props.sortMeta}/>)}
+                        {columns.map((column, i) => 
+                            <HeaderCell key={i} column={column} onSort={onSort} sortMeta={sortMeta}/>)}
                     </tr>
-                    {props.onRowRefresh()}
+                    {onRowRefresh()}
                 </tbody>
             </table>
         </div>
     )
 }
+
+export default Grid;

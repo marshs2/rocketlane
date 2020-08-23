@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { Server } from "miragejs"
-import Model from './api/Model';
-import { UserDataModel } from './api/Model';
+import Model, { UserDataModel } from './api/Model';
 import RoutesWrap from './Routes';
 
 new Server({

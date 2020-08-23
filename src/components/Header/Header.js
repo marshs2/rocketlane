@@ -1,10 +1,10 @@
 import React from 'react';
-import rocketlane from '../assets/rocketlane.svg';
+import rocketlane from '../../assets/rocketlane.svg';
 import { Link } from 'react-router-dom';
 
 import './Header.css';
 
-export default function Header (props) {
+const Header = (props) => {
 
      return (
         <header className="main-header"> 
@@ -18,3 +18,5 @@ export default function Header (props) {
         </header>
       )
 }
+
+export default Header;

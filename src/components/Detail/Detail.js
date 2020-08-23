@@ -4,12 +4,13 @@ import {
   useParams,
   Link
 } from "react-router-dom";
+import axios from 'axios';
 
 import './Detail.css';
-import placeholder from '../assets/placeholder.png';
+import placeholder from '../../assets/placeholder.png';
 import NoUserFound from './NoUserFound';
 
-export default function Detail (props) {
+const Detail = (props) => {
     const [rowDetail, setRowDetail] = useState({});
     const [noUserFound, setNoUserFound] = useState(false);
     const [userAvailable, setUserAvailable] = useState(false);
@@ -23,10 +24,9 @@ export default function Detail (props) {
             setRowDetail(JSON.parse(row));
             setUserAvailable(true);
         } else {
-            fetch("/reps/users")
-            .then((res) => res.json())
-            .then((json) => {
-                let rowList = json.filter((row) => {
+            (async () => {
+                const { data } = await axios.get("/reps/users");
+                let rowList = data.filter((row) => {
                     return parseInt(row['id']) === parseInt(rep_id);
                 });
                 // If User is not available in both cases, mark as NoUserFound
@@ -36,12 +36,12 @@ export default function Detail (props) {
                 } else {
                     setNoUserFound(true);
                 }
-            });
+            })();
         };
     }, [rep_id]);
 
     return (
-        <React.Fragment>
+        <>
             {userAvailable &&
             <div className="main">
                 <div className="heading">
@@ -66,17 +66,17 @@ export default function Detail (props) {
                                 <div className="details">
                                     <div className="name-field">{rowDetail.rep}</div><br/>
                                     {Object.keys(rowDetail).length?
-                                        <React.Fragment>
+                                        <>
                                             <div>Region: {rowDetail.region}</div><br/>
                                             {rowDetail.address &&
-                                            <React.Fragment>
+                                            <>
                                                 <div>Address: {rowDetail.address}</div>
                                                 <div>Street: {rowDetail.street}</div>
                                                 <div>City: {rowDetail.city}</div>
                                                 <div>Country: {rowDetail.country}</div>
-                                            </React.Fragment>
+                                            </>
                                             }
-                                        </React.Fragment>: null
+                                        </>: null
                                     }
                                 </div>
                             </div>
@@ -90,6 +90,8 @@ export default function Detail (props) {
             {noUserFound &&
                 <NoUserFound />
             }
-        </React.Fragment>
+        </>
     )
 }
+
+export default Detail;
